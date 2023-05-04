@@ -4,6 +4,8 @@ from django.shortcuts import render
 from app.forms import *
 from django.http import HttpResponse
 
+from django.core.mail import send_mail
+
 def Registration(request):
     UFO=User_Form()
     PFO=Profile_Form()
@@ -21,6 +23,12 @@ def Registration(request):
             NSPO=PFD.save(commit=False)
             NSPO.username=NSUO
             NSPO.save()
+
+            send_mail('Registration', 
+                      'Sucessfully Registration is done', 
+                      'munishr428@gmail.com', 
+                      [NSUO.email], 
+                      fail_silently=False)
             return HttpResponse('Registered Sucessfully')
         else:
             return HttpResponse('Data is not Valid')
