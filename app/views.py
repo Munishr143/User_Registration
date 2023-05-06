@@ -6,6 +6,9 @@ from django.http import HttpResponse
 
 from django.core.mail import send_mail
 
+def Home(request):
+    return render(request, 'home.html')
+
 def Registration(request):
     UFO=User_Form()
     PFO=Profile_Form()
