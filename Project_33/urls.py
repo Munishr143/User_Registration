@@ -23,4 +23,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('Registration/', Registration, name='Registration'),
     path('Home/', Home, name='Home'),
+    path('User_Login/', User_Login, name='User_Login'),
+    path('User_Logout/', User_Logout, name='User_Logout'),
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
