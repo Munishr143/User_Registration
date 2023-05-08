@@ -1,0 +1,14 @@
+{% extends 'dummy.html' %}
+
+{% block title %}
+    <title>Dispay Profile</title>
+{% endblock %}
+
+{% block body_block %}
+<h1>Displaying the details of Profile</h1>
+<h1>Username is {{UO.username}}</h1>
+<h1>Email of user is {{UO.email}}</h1>
+<h1>Address of the user is {{PO.Address}}</h1>
+<h1>Profile_Pic of the User is</h1>
+<img src="{{PO.Profile_Pic.url}}" alt="No Image" height="300px" width="300px">
+{% endblock %}

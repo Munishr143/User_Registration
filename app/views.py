@@ -68,3 +68,34 @@ def User_Login(request):
 def User_Logout(request):
     logout(request)
     return HttpResponseRedirect(reverse('Home'))
+
+@login_required
+def display_profile(request):
+    username=request.session.get('username')
+    UO=User.objects.get(username=username)
+    PO=Profile.objects.get(username=UO)
+    d={'UO':UO, 'PO':PO}
+        
+    return render(request, 'display_profile.html', d)
+
+@login_required
+def Change_Password(request):
+    if request.method=='POST':
+        pw=request.POST['pw']
+        username=request.session.get('username')
+        UO=User.objects.get(username=username)
+        UO.set_password(pw)
+        UO.save()
+        return HttpResponse('Password is changed sucessfully')
+    return render(request, 'Change_Password.html')
+
+def Forget_Password(request):
+    if request.method=='POST':
+        username=request.POST['username']
+        pw=request.POST['pw']
+        UO=User.objects.get(username=username)
+        UO.set_password(pw)
+        UO.save()
+        return HttpResponse('Password is changed sucessfully')
+
+    return render(request, 'Forget_Password.html')
