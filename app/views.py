@@ -89,13 +89,27 @@ def Change_Password(request):
         return HttpResponse('Password is changed sucessfully')
     return render(request, 'Change_Password.html')
 
+# def Forget_Password(request):
+#     if request.method=='POST':
+#         username=request.POST['username']
+#         pw=request.POST['pw']
+#         UO=User.objects.get(username=username)
+#         UO.set_password(pw)
+#         UO.save()
+#         return HttpResponse('Password is changed sucessfully')
+
+#     return render(request, 'Forget_Password.html')
+
 def Forget_Password(request):
     if request.method=='POST':
         username=request.POST['username']
         pw=request.POST['pw']
-        UO=User.objects.get(username=username)
-        UO.set_password(pw)
-        UO.save()
+        UO=User.objects.filter(username=username)
+        if UO:
+            UO[0].set_password(pw)
+            UO[0].save()
+        else:
+            return HttpResponse('Invalid Username')
         return HttpResponse('Password is changed sucessfully')
 
     return render(request, 'Forget_Password.html')
